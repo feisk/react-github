@@ -1,7 +1,7 @@
 import { SHOW_ALERT, HIDE_ALERT } from "./types";
 
 const handlers = {
-  [SHOW_ALERT]: (state, action) => action.payload,
+  [SHOW_ALERT]: (state, { payload }) => payload,
   [HIDE_ALERT]: () => null,
   DEFAULT: (state) => state,
 };
@@ -11,17 +11,3 @@ export const alertReducer = (state, action) => {
 
   return handler(state, action);
 };
-
-// export const alertReducer = (state, action) => {
-//   switch (action.type) {
-//     case SHOW_ALERT:
-//       return {
-//         .,,action.payload,
-//       };
-//     case HIDE_ALERT:
-//       return null,
-//       };
-//     default:
-//       return state;
-//   }
-// };

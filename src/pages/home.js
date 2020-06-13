@@ -1,20 +1,30 @@
-import React from "react";
+import React, { useContext } from "react";
 
-import { Search, Card } from "../components";
+import { GithubContext } from "../context";
+import { Search, Card, Loader } from "../components";
 
 const Home = () => {
-  const cards = Array.from({ length: 12 }, () => Card);
+  const { loading, users } = useContext(GithubContext);
+
+  const isRenderUsers = !loading && users;
 
   return (
     <>
       <Search />
 
       <div className="row">
-        {cards.map((Item, index) => (
-          <div key={index} className="col-sm-4 mb-4">
-            <Item />
-          </div>
-        ))}
+        {loading && <Loader />}
+
+        {isRenderUsers &&
+          (users.length ? (
+            users.map((user) => (
+              <div key={user.id} className="col-sm-4 mb-4">
+                <Card user={user} />
+              </div>
+            ))
+          ) : (
+            <p className="col text-center">Ничего не найдено</p>
+          ))}
       </div>
     </>
   );
