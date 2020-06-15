@@ -9,6 +9,7 @@ import {
   CLEAR_USERS,
   SEARCH_USERS,
   SET_LOADING,
+  SET_REPOS_LOADING,
 } from "./types";
 
 const initialState = {
@@ -16,6 +17,7 @@ const initialState = {
   users: [],
   repos: [],
   loading: false,
+  reposLoading: false,
   searchValue: "",
 };
 
@@ -66,7 +68,7 @@ export const GithubState = ({ children }) => {
 
   const getRepos = async (name) => {
     try {
-      setLoading();
+      setReposLoading();
 
       await axios
         .get(
@@ -87,7 +89,9 @@ export const GithubState = ({ children }) => {
 
   const setLoading = () => dispatch({ type: SET_LOADING });
 
-  const { user, users, repos, loading, searchValue } = state;
+  const setReposLoading = () => dispatch({ type: SET_REPOS_LOADING });
+
+  const { user, users, repos, loading, reposLoading, searchValue } = state;
 
   return (
     <GithubContext.Provider
@@ -97,10 +101,12 @@ export const GithubState = ({ children }) => {
         getUser,
         clearUsers,
         setLoading,
+        setReposLoading,
         user,
         users,
         repos,
         loading,
+        reposLoading,
         searchValue,
       }}
     >

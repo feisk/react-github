@@ -20,7 +20,7 @@ const Home = () => {
         {isShowSearchResult &&
           (isShowUsersList ? (
             users.map((user) => (
-              <div key={user.id} className="col-sm-4 mb-4">
+              <div key={user.id} className="col-sm-6 col-md-4 col-lg-3 mb-4">
                 <Card user={user} />
               </div>
             ))

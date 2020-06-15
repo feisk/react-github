@@ -2,18 +2,21 @@ import React, { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 import { GithubContext } from "../context";
-import { Loader, Repos } from "../components";
+import { Loader } from "../components";
 
 const Profile = (props) => {
   const { match } = props;
 
-  const { getUser, getRepos, loading, user, repos } = useContext(GithubContext);
+  const { getUser, getRepos, loading, reposLoading, user, repos } = useContext(
+    GithubContext
+  );
 
   useEffect(() => {
     const userName = match.params.name;
 
     getUser(userName);
     getRepos(userName);
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -34,7 +37,7 @@ const Profile = (props) => {
 
   const isShowUserResult = !loading && user;
 
-  const isShowReposResult = !loading && repos;
+  const isShowReposResult = !reposLoading && repos;
 
   const isShowReposList = repos && repos.length;
 
@@ -114,17 +117,33 @@ const Profile = (props) => {
         </div>
       )}
 
-      {isShowReposResult && (
-        <div className="col-12 mt-4">
-          <h2 className="mb-3">Список репозиториев</h2>
+      <div className="col-12 mt-4">
+        <h2 className="mb-3">Список репозиториев</h2>
 
-          {isShowReposList ? (
-            <Repos repos={repos} />
+        {reposLoading && (
+          <div className="row">
+            <Loader />
+          </div>
+        )}
+
+        {isShowReposResult &&
+          (isShowReposList ? (
+            repos.map((repo) => (
+              <a
+                key={repo.id}
+                href={repo.html_url}
+                title={repo.name}
+                className="btn btn-outline-primary mx-1 mb-2"
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                {repo.name}
+              </a>
+            ))
           ) : (
             <p>Нет публичных репозиториев</p>
-          )}
-        </div>
-      )}
+          ))}
+      </div>
     </div>
   );
 };
