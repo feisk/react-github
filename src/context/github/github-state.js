@@ -52,7 +52,7 @@ export const GithubState = ({ children }) => {
       setLoading();
 
       await axios
-        .get(`https://api.github.com/users/${name}${urlClientPath}`)
+        .get(`https://api.github.com/users/${name}?${urlClientPath}`)
         .then(({ data }) =>
           dispatch({
             type: GET_USER,
@@ -70,12 +70,12 @@ export const GithubState = ({ children }) => {
 
       await axios
         .get(
-          `https://api.github.com/users/${name}${urlClientPath}/repos?per_page=5`
+          `https://api.github.com/users/${name}/repos?per_page=100${urlClientPath}`
         )
         .then(({ data }) =>
           dispatch({
             type: GET_REPOS,
-            payload: data.items,
+            payload: data,
           })
         );
     } catch (e) {

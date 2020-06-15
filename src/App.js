@@ -13,13 +13,13 @@ function App() {
           <Header />
 
           <main className="container pt-4">
-            <Alert />
-
             <Switch>
               <Route path="/" exact component={Home} />
               <Route path="/about" component={About} />
               <Route path="/profile/:name" component={Profile} />
             </Switch>
+
+            <Alert />
           </main>
         </BrowserRouter>
       </AlertState>

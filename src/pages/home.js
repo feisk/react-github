@@ -4,9 +4,13 @@ import { GithubContext } from "../context";
 import { Search, Card, Loader } from "../components";
 
 const Home = () => {
-  const { loading, users } = useContext(GithubContext);
+  const { loading, users, searchValue } = useContext(GithubContext);
 
-  const isRenderUsers = !loading && users;
+  const isShowSearchResult = !loading && searchValue && users;
+
+  const isShowUsersList = users && users.length;
+
+  console.log("isShowSearchResult", loading, users, searchValue);
 
   return (
     <>
@@ -15,8 +19,8 @@ const Home = () => {
       <div className="row">
         {loading && <Loader />}
 
-        {isRenderUsers &&
-          (users.length ? (
+        {isShowSearchResult &&
+          (isShowUsersList ? (
             users.map((user) => (
               <div key={user.id} className="col-sm-4 mb-4">
                 <Card user={user} />

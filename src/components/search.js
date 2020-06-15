@@ -17,7 +17,7 @@ const Root = styled.form`
 
 const Search = () => {
   const { show, hide, alert } = useContext(AlertContext);
-  const { search, searchValue } = useContext(GithubContext);
+  const { search, clearUsers, searchValue } = useContext(GithubContext);
 
   const [value, setValue] = useState(searchValue);
 
@@ -29,7 +29,8 @@ const Search = () => {
     if (trimValue) {
       search(trimValue);
     } else {
-      show("Введите данные пользователя!");
+      clearUsers();
+      show("Введите имя или никнейм!");
     }
   };
 
@@ -44,7 +45,7 @@ const Search = () => {
       <input
         type="text"
         className="form-control"
-        placeholder="Введите ник пользователя"
+        placeholder="Введите имя пользователя или никнейм аккаунта Github"
         value={value}
         onChange={handleChange}
       />

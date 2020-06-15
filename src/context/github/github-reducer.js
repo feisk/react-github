@@ -10,8 +10,8 @@ const handlers = {
   [SEARCH_USERS]: (state, { payload }) => ({
     ...state,
     users: payload.users,
-    loading: false,
     searchValue: payload.searchValue,
+    loading: false,
   }),
   [GET_REPOS]: (state, { payload }) => ({
     ...state,
@@ -29,6 +29,7 @@ const handlers = {
   }),
   [CLEAR_USERS]: (state) => ({
     ...state,
+    searchValue: "",
     users: [],
   }),
   DEFAULT: (state) => state,
