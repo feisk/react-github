@@ -10,8 +10,6 @@ const Home = () => {
 
   const isShowUsersList = users && users.length;
 
-  console.log("isShowSearchResult", loading, users, searchValue);
-
   return (
     <>
       <Search />
