@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 
 import { AlertContext, GithubContext } from "../context";
@@ -19,7 +19,14 @@ const Search = () => {
   const { show, hide, alert } = useContext(AlertContext);
   const { search, clearUsers, searchValue } = useContext(GithubContext);
 
-  const [value, setValue] = useState(searchValue);
+  const [value, setValue] = useState(searchValue || "react");
+
+  useEffect(() => {
+    if (!searchValue) {
+      search(value);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
