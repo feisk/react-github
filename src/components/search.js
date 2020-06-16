@@ -55,6 +55,7 @@ const Search = () => {
         placeholder="Введите имя пользователя или никнейм аккаунта Github"
         value={value}
         onChange={handleChange}
+        autoFocus
       />
 
       <button type="submit" onClick={handleSubmit} className="btn btn-primary">
