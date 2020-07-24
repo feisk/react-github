@@ -14,6 +14,7 @@ const Root = styled(Link)`
     box-shadow: 0px 4px 11px rgba(132, 140, 168, 0.15);
 
     .card-img-top {
+        transition: transform 5s ease-out;
       transform: scale(1.125);
     }
   }
@@ -23,7 +24,7 @@ const Image = styled.div`
   overflow: hidden;
 
   .card-img-top {
-    transition: transform 0.3s ease-out;
+    transition: transform .5s ease-out;
     will-change: transform;
   }
 `;
