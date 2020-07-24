@@ -90,7 +90,8 @@ const Profile = (props) => {
                       <strong>Company: </strong> {company || "-"}
                     </li>
                     <li className="list-group-item">
-                      <strong>Website: </strong> {blog || "-"}
+                      <strong>Website: </strong>
+                      {blog ? <a href={blog} title="website">{blog}</a> : "-"}
                     </li>
                     <li className="list-group-item">
                       <div className="badge badge-primary mr-2">
